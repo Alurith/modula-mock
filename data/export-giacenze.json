@@ -1,0 +1,24 @@
+{
+    "GUID": "d3fbf73d-d9ce-4cbb-a276-421850882a96",
+    "DATA": {
+        "EXP_GIACENZE": [
+            {
+                "GIA_ARTICOLO": "ART00000001",
+                "GIA_GIAC": 5.000,
+                "GIA_VER": 0.000,
+                "GIA_PRE": 0.000,
+                "GIA_ARTICOLO_DES": "ART00000001 DESCRIPTION",
+                "GIA_ARTICOLO_NOTE": ""
+            },
+            {
+                "GIA_ARTICOLO": "ART00000002",
+                "GIA_GIAC": 18.000,
+                "GIA_VER": 0.000,
+                "GIA_PRE": 0.000,
+                "GIA_ARTICOLO_DES": "ART00000002 DESCRIPTION",
+                "GIA_ARTICOLO_NOTE": ""
+            }
+        ]
+    },
+    "TransactionStatus": "END"
+}
