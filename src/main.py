@@ -4,7 +4,13 @@ import base64
 
 from litestar import Litestar, get, post, Router, MediaType, Controller, Request
 from litestar.connection import ASGIConnection
-from src.schemas import ImportOrders, ExportGiacenze, ImportArticles, GiacenzeACK
+from src.schemas import (
+    ImportOrders,
+    ExportGiacenze,
+    ImportArticles,
+    GiacenzeACK,
+    ExportOrdini,
+)
 
 from litestar.handlers.base import BaseRouteHandler
 from litestar.exceptions import NotAuthorizedException
@@ -33,6 +39,19 @@ class ExportArticoli(Controller):
         return "Operazione completata con successo"
 
 
+class ExportStatoOrdini(Controller):
+    path = "CFG-EXP-ORDRIG-STATO/"
+
+    @get()
+    async def get_stato_ordini(self) -> List[ExportOrdini]:
+        with open("data/export-ordini.json", mode="r") as json_data:
+            return ExportOrdini(**json.load(json_data))
+
+    @post("ACK", media_type=MediaType.TEXT)
+    async def get_giacenze_ack(self, data: GiacenzeACK) -> str:
+        return "Operazione completata con successo"
+
+
 @post("CFG-IMP-ARTICOLI", media_type=MediaType.TEXT)
 async def import_articles(data: ImportArticles) -> str:
     return "Operazione completata con successo"
@@ -45,7 +64,7 @@ async def import_orders(data: ImportOrders, request: Request) -> str:
 
 mock_router = Router(
     path="api/jobs/",
-    route_handlers=[ExportArticoli, import_articles, import_orders],
+    route_handlers=[ExportArticoli, ExportStatoOrdini, import_articles, import_orders],
     guards=[basic_auth_guard],
 )
 
